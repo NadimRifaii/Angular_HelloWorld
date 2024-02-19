@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WishtItem } from 'src/shared/models/wishItem';
+import { WishItem } from 'src/shared/models/wishItem';
 @Component({
   selector: 'app-root',//<app-root></app-root> 
   templateUrl: './app.component.html',
@@ -14,17 +14,33 @@ import { WishtItem } from 'src/shared/models/wishItem';
  */
 export class AppComponent {
   title = 'wishlist';
-  items: WishtItem[] = [
-    new WishtItem('To Learn Angular', false),
-    new WishtItem('To Learn React', true),
-    new WishtItem('To Learn Vue', false)
+  items: WishItem[] = [
+    new WishItem('To Learn Angular', false),
+    new WishItem('To Learn React', true),
+    new WishItem('To Learn Vue', false)
   ];
+  listFilter: String = '0'
   newWishText = ''
+  visibleItems: WishItem[] = this.items
   addWish() {
-    this.items.push(new WishtItem(this.newWishText, false))
+    this.items.push(new WishItem(this.newWishText, false))
+    this.visibleItems = [...this.items]
     this.newWishText = ''
   }
-  toggleItem(e: any, item: WishtItem) {
+  filterChanged(value: any) {
+    switch (value) {
+      case "0":
+        this.visibleItems = this.items;
+        break;
+      case "1":
+        this.visibleItems = this.items.filter(item => !item.isCompleted)
+        break;
+      default:
+        this.visibleItems = this.items.filter(item => item.isCompleted)
+    }
+  }
+  toggleItem(e: any, item: WishItem) {
     item.isCompleted = !item.isCompleted;
+
   }
 }

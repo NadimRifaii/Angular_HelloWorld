@@ -10,6 +10,16 @@
     </div>
   </form>
 
+  <div class="row mt-3">
+    <div class="col-sm-2">
+      <select class="form-select" [(ngModel)]="listFilter" (ngModelChange)="filterChanged($event)">
+        <option value="0">All</option>
+        <option value="1">Unfulfilled</option>
+        <option value="2">Fulfilled</option>
+      </select>
+    </div>
+  </div>
+
   <div *ngIf="items.length==0; then noItems else showItems">
   </div>
   <ng-template #noItems>
@@ -17,8 +27,8 @@
   </ng-template>
   <!-- we cannot have to structural directives on the same element -->
   <ng-template #showItems>
-    <ul *ngIf="items.length>0" class="wish-list">
-      <li *ngFor="let item of items; index as ii">
+    <ul *ngIf="visibleItems.length>0" class="wish-list">
+      <li *ngFor="let item of visibleItems; index as ii">
         <div class="form-check">
           <label class="form-check-label">
             <input type="checkbox" [checked]="item.isCompleted" [attr.data-index]="ii"
