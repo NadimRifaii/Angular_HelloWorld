@@ -1,15 +1,29 @@
 <div class="container">
+
+  <form class="row mt-3 gx-3 gy-2 align-items-center justify-content-center">
+    <div class="col-sm-6">
+      <label for="specificSizeInputName" class="visually-hidden">Wish</label>
+      <input type="text" name="wishText" class="form-control" [(ngModel)]="newWishText">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" type="submit" (click)="$event.preventDefault(); addWish()">Add Wish</button>
+    </div>
+  </form>
+
   <div *ngIf="items.length==0; then noItems else showItems">
   </div>
   <ng-template #noItems>
     There are no wishes to display
   </ng-template>
+  <!-- we cannot have to structural directives on the same element -->
   <ng-template #showItems>
     <ul *ngIf="items.length>0" class="wish-list">
-      <li *ngFor="let item of items">
+      <li *ngFor="let item of items; index as ii">
         <div class="form-check">
           <label class="form-check-label">
-            <input type="checkbox" type="checkbox"> {{item.wishText}}
+            <input type="checkbox" [checked]="item.isCompleted" [attr.data-index]="ii"
+              (click)="toggleItem($event,item)">
+            {{item.wishText}}
           </label>
         </div>
       </li>
