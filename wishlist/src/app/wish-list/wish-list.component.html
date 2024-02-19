@@ -1,0 +1,18 @@
+<div *ngIf="items.length==0; then noItems else showItems">
+</div>
+<ng-template #noItems>
+  There are no wishes to display
+</ng-template>
+<!-- we cannot have to structural directives on the same element -->
+<ng-template #showItems>
+  <ul *ngIf="items.length>0" class="wish-list">
+    <li *ngFor="let item of items; index as ii">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" [checked]="item.isCompleted" [attr.data-index]="ii" (click)="toggleItem($event,item)">
+          {{item.wishText}}
+        </label>
+      </div>
+    </li>
+  </ul>
+</ng-template>
