@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WishItem } from 'src/shared/models/wishItem';
 
-
-const filters = [
-  (item: WishItem) => item,
-  (item: WishItem) => !item.isCompleted,
-  (item: WishItem) => item.isCompleted,
-]
 
 
 @Component({
@@ -22,34 +16,24 @@ const filters = [
  * for this component
  */
 export class AppComponent {
-  title = 'wishlist';
   items: WishItem[] = [
-    new WishItem('To Learn Angular', false),
-    new WishItem('To Learn React', true),
-    new WishItem('To Learn Vue', false)
-  ];
-  listFilter: String = '0'
-  newWishText = ''
+    new WishItem(`To Learn Angular`, false),
+    new WishItem(`To Learn React`, true),
+    new WishItem(`To Learn Express`, true),
+  ]
+  title = 'wishlist';
+  filter: any = () => {
+
+  }
+  // visibleItems: WishItem[] = this.items
   get visibleItems(): WishItem[] {
-    let value = this.listFilter
-    return this.items.filter(filters[+value])
+    return this.items.filter(this.filter);
   }
-  addWish() {
-    this.items.push(new WishItem(this.newWishText, false))
-    // this.visibleItems = [...this.items]
-    this.newWishText = ''
+  /**
+   * The getter allow us to react to any change that we make to the original items array and it's inner objects
+  */
+  filterChanged(value: any) {
+    // this.visibleItems = this.items.filter(filters[value]);
   }
-  // filterChanged(value: any) {
-  //   switch (value) {
-  //     case "0":
-  //       this.visibleItems = this.items;
-  //       break;
-  //     case "1":
-  //       this.visibleItems = this.items.filter(item => !item.isCompleted)
-  //       break;
-  //     default:
-  //       this.visibleItems = this.items.filter(item => item.isCompleted)
-  //   }
-  // }
 
 }

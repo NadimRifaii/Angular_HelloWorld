@@ -6,10 +6,9 @@ import { WishItem } from 'src/shared/models/wishItem';
   templateUrl: './wish-list.component.html',
   styleUrls: ['./wish-list.component.css']
 })
+
 export class WishListComponent {
-  @Input()
+  @Input()// with Input the data flow is from the parent to the child component
   items: WishItem[] = []
-  toggleItem(e: any, item: WishItem) {
-    item.isCompleted = !item.isCompleted;
-  }
+
 }
