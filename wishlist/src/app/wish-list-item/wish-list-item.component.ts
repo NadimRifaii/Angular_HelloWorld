@@ -10,6 +10,14 @@ export class WishListItemComponent {
   @Input() wishText!: string // this wishText is a non-null property , it's a trick to the compiler
   @Input() fullfilled!: boolean
   @Output() fullfilledChange = new EventEmitter<boolean>()
+
+  get cssClasses() {
+    // return this.fullfilled ? 'strikeout text-muted' : ''
+    // return this.fullfilled ? ['strikeout', 'text-muted'] : []
+    // return { 'strikeout': this.fullfilled, 'text-muted': this.fullfilled }
+    return { 'strikeout text-muted': this.fullfilled }
+  }
+
   toggleItem(event?: Event, item?: WishItem) {
     this.fullfilled = !this.fullfilled
     this.fullfilledChange.emit(this.fullfilled)
