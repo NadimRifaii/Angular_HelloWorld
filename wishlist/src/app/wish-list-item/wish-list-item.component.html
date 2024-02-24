@@ -1,3 +1,10 @@
-<label class="form-check-label" [ngClass]="cssClasses">
-  <input (change)="toggleItem($event)" [checked]="fullfilled" type="checkbox" [attr.data-index]="i">{{wishText}}
-</label>
+<li class="d-flex justify-content-between">
+  <div class="form-check">
+    <label class="form-check-label" [ngClass]="cssClasses">
+      <input (change)="toggleItem($event)" [checked]="fullfilled" type="checkbox" [attr.data-index]="i">{{wishText}}
+    </label>
+  </div>
+  <div>
+    <button (click)="removeWish()" type="button" class="btn-close"></button>
+  </div>
+</li>

@@ -3,8 +3,18 @@
 </div>
 <ng-template #showItems>
   <ul class="wish-list" *ngIf="items.length>=1">
-    <app-wish-list-item class="form-check" *ngFor="let item of items;index as i" [wishText]="item.wishText"
-      [(fullfilled)]="item.isCompleted" [i]="i">
+    <app-wish-list-item *ngFor="let item of items;index as i" [wishText]="item.wishText"
+      [(fullfilled)]="item.isCompleted" [i]="i" [item]="item">
     </app-wish-list-item>
   </ul>
 </ng-template>
+
+
+<!-- 
+  The observer pattern 
+
+  We have an object that needs to supply data to other objects
+  So those other objects subscribe to the observer object 
+  And then when those changes occur , it notifies the subscribers
+
+-->

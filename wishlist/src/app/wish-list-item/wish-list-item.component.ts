@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { WishItem } from 'src/shared/models/wishItem';
+import events from '../../shared/services/eventService'
+
 @Component({
   selector: 'app-wish-list-item',
   templateUrl: './wish-list-item.component.html',
@@ -9,6 +11,7 @@ export class WishListItemComponent {
   @Input() i: number = 0
   @Input() wishText!: string // this wishText is a non-null property , it's a trick to the compiler
   @Input() fullfilled!: boolean
+  @Input() item!: WishItem
   @Output() fullfilledChange = new EventEmitter<boolean>()
 
   get cssClasses() {
@@ -17,7 +20,9 @@ export class WishListItemComponent {
     // return { 'strikeout': this.fullfilled, 'text-muted': this.fullfilled }
     return { 'strikeout text-muted': this.fullfilled }
   }
-
+  removeWish() {
+    events.emit('removeWish', this.item)
+  }
   toggleItem(event?: Event, item?: WishItem) {
     this.fullfilled = !this.fullfilled
     this.fullfilledChange.emit(this.fullfilled)

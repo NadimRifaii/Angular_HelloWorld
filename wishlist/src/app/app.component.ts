@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WishItem } from 'src/shared/models/wishItem';
 
-
+import events from '../shared/services/eventService'
 
 @Component({
   selector: 'app-root',//<app-root></app-root> 
@@ -24,6 +24,12 @@ export class AppComponent {
   title = 'wishlist';
   filter: any = () => {
 
+  }
+  constructor() {
+    events.listen('removeWish', (wish: WishItem) => {
+      const index = this.items.indexOf(wish);
+      this.items.splice(index, 1)
+    })
   }
   // visibleItems: WishItem[] = this.items
   get visibleItems(): WishItem[] {

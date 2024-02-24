@@ -6,14 +6,16 @@
     <!-- Two way binding [(input/output)] -->
   </div>
   <div class="row mt-3">
-    <app-wish-list [items]="items.filter(filter)"></app-wish-list>
+    <div class="col-sm-4">
+      <app-wish-list [items]="items.filter(filter)"></app-wish-list>
+    </div>
   </div>
 </div>
 
 <!-- Directives
   *ngFor (structural directive) , *ngIf (structural directive), *ngSwitch, *ngSwitchCase, *ngSwitchDefault
   Everything inside a directive is a javascript expression 
-  
+
   // property binding [attributeName]="value" 
   custom attribute binding [attr.attributeName]="value"
 
