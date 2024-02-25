@@ -1,0 +1,14 @@
+[
+  {
+    "wishText": "To learn angular",
+    "isCompleted": false
+  },
+  {
+    "wishText": "To learn React",
+    "isCompleted": true
+  },
+  {
+    "wishText": "To learn Vue",
+    "isCompleted": false
+  }
+]

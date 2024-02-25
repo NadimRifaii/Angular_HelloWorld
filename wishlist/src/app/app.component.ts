@@ -11,6 +11,7 @@ import { WishItem } from 'src/shared/models/wishItem';
  * So we want to use the dependency injection service so we don't have to create our dependencies ourselves
  * All we have to do is tell Angular what it is that we want to use and it will automatically inject our dependencies
  */
+import { WishService } from './wish.service';
 import { EventService } from '../shared/services/EventService';
 @Component({
   selector: 'app-root',//<app-root></app-root> 
@@ -24,17 +25,15 @@ import { EventService } from '../shared/services/EventService';
  * stylesUrls
  * for this component
  */
-export class AppComponent {
+export class AppComponent implements OnInit {
   items: WishItem[] = [
-    new WishItem(`To Learn Angular`, false),
-    new WishItem(`To Learn React`, true),
-    new WishItem(`To Learn Express`, true),
+
   ]
   title = 'wishlist';
   filter: any = () => {
 
   }
-  constructor(private events: EventService) {
+  constructor(private events: EventService, private wishService: WishService) {
     /**
      * All we have to say is I want this wishlist component to rely upon this dependency 
      * and angular will provide that object for us automatically
@@ -42,6 +41,12 @@ export class AppComponent {
     this.events.listen('removeWish', (wish: WishItem) => {
       const index = this.items.indexOf(wish);
       this.items.splice(index, 1)
+    })
+  }
+  ngOnInit(): void {
+    this.wishService.getWishes().subscribe((data: any) => {
+      //callback that will execute when the request has been completed
+      this.items = data
     })
   }
   // visibleItems: WishItem[] = this.items
