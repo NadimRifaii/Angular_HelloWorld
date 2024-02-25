@@ -44,9 +44,11 @@ export class AppComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+    //callback that will execute when the request has been completed
     this.wishService.getWishes().subscribe((data: any) => {
-      //callback that will execute when the request has been completed
       this.items = data
+    }, (error: any) => {
+      alert(error.message)
     })
   }
   // visibleItems: WishItem[] = this.items
