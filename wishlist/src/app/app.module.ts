@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 import { EventService } from 'src/shared/services/EventService';
 import { WishModule } from './wish/wish.module';
+import { WishComponent } from './wish/wish.component';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,29 @@
+<div class="container">
+  <app-add-wish-form (addWish)="items.push($event)"></app-add-wish-form>
+  <div class="row mt-3">
+    <!-- <app-wish-filter (filterEvent)="filter=$event"></app-wish-filter> -->
+    <app-wish-filter [(filter)]="filter"></app-wish-filter>
+    <!-- Two way binding [(input/output)] -->
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm-4">
+      <app-wish-list [items]="items.filter(filter)"></app-wish-list>
+    </div>
+  </div>
+</div>
+<!-- Directives
+  *ngFor (structural directive) , *ngIf (structural directive), *ngSwitch, *ngSwitchCase, *ngSwitchDefault
+  Everything inside a directive is a javascript expression 
+
+  // property binding [attributeName]="value" 
+  custom attribute binding [attr.attributeName]="value"
+
+  // event binding 
+  (eventName)="function()"
+
+  // bind form field to a property in our class 
+  [(ngModel)]="propertyName"
+
+  // ngModelEvent is an event that only occurs when the model changes
+  The event object passed to the ngModelEvent is not your typical event object , it contains the new value of the model
+-->
