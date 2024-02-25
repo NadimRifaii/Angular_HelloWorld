@@ -1,0 +1,9 @@
+.toolbar a {
+  color: white;
+  margin-right: 15px;
+
+}
+
+.toolbar a:first-of-type {
+  margin-left: 15px;
+}

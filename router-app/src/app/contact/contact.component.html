@@ -1,0 +1,39 @@
+<form [formGroup]="contactForm" (ngSubmit)="$event.preventDefault(); submitForm()" class="container p-5">
+  <div class="mb-3">
+    <label class="form-label">Your name</label>
+    <!-- <input [formControl]="senderNameControl" type="text" class="form-control"> -->
+    <input formControlName="senderName" type="text" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Your email address</label>
+    <!-- <input [formControl]="senderEmailControl" type="email" class="form-control"> -->
+    <input formControlName="senderEmail" type="email" class="form-control">
+    <div *ngIf="contactForm.get('senderEmail')?.invalid && contactForm.get('senderEmail')?.touched">
+      <small class="text-danger" *ngIf="contactForm.get('senderEmail')?.hasError('required')">
+        This Field is required
+      </small>
+      <small class="text-danger" *ngIf="contactForm.get('senderEmail')?.hasError('email')">
+        Invalid email format
+      </small>
+      <small class="text-danger" *ngIf="contactForm.get('senderEmail')?.hasError('invalidEmailDomain')">
+        Invalid email domain
+      </small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Message</label>
+    <!-- <textarea [formControl]="senderMessageControl" rows="3" class="form-control"></textarea> -->
+    <textarea formControlName="senderMessage" rows="3" class="form-control"></textarea>
+    <div *ngIf="contactForm.get('senderMessage')?.invalid && contactForm.get('senderMessage')?.touched">
+      <small class="text-danger" *ngIf="contactForm.get('senderMessage')?.hasError('required')">
+        This Field is required
+      </small>
+      <small class="text-danger" *ngIf="contactForm.get('senderMessage')?.hasError('minlength')">
+        The message must be at least 6 characters long
+      </small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <button [disabled]="contactForm.invalid" type="submit" class="btn btn-primary">Send Message</button>
+  </div>
+</form>
