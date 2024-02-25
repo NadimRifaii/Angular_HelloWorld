@@ -1,3 +1,4 @@
+import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 /**
  * This is the Reactive Extensions for javascript wich angular uses extensively
@@ -10,8 +11,12 @@ import { Observable, Subject } from "rxjs";
  * So that we can have multiple objects that subscribe the our Observable object
  * Meaning that we can issue a single event then multiple objects can be listening for that same event
  */
-
-class EventServie {
+@Injectable({
+  providedIn: 'root',//application level injector =>The event service would be available throughout the entire application
+  // providedIn: 'platform',//It's possible to have multiple angular applications running in the same page And it could be possible that we would want this class to be injected or injectable throughout all the applications
+  // providedIn:'any'
+})//can be injected to other classes
+export class EventService {
   private subject = new Subject()
   /**
    * We need the Subject wich is going to allow us to essentially pass messages (events) from the Observable object
@@ -32,5 +37,3 @@ class EventServie {
      */
   }
 }
-
-export default new EventServie()

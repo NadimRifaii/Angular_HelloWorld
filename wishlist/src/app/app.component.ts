@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { WishItem } from 'src/shared/models/wishItem';
 
-import events from '../shared/services/eventService'
-
+// import events from '../shared/services/EventService'
+//this object is a dependency in the app and wish-list-item components
+//It is a hard dependency because we have actually created that object and we are actually using that object inside of those components
+/**
+ * Hard dependencies are a little bit problematic because it's more difficult to maintain and update and also it can also cause some issues 
+ * whenever you need to test your component
+ * 
+ * So we want to use the dependency injection service so we don't have to create our dependencies ourselves
+ * All we have to do is tell Angular what it is that we want to use and it will automatically inject our dependencies
+ */
+import { EventService } from '../shared/services/EventService';
 @Component({
   selector: 'app-root',//<app-root></app-root> 
   templateUrl: './app.component.html',
@@ -25,8 +34,12 @@ export class AppComponent {
   filter: any = () => {
 
   }
-  constructor() {
-    events.listen('removeWish', (wish: WishItem) => {
+  constructor(private events: EventService) {
+    /**
+     * All we have to say is I want this wishlist component to rely upon this dependency 
+     * and angular will provide that object for us automatically
+     */
+    this.events.listen('removeWish', (wish: WishItem) => {
       const index = this.items.indexOf(wish);
       this.items.splice(index, 1)
     })

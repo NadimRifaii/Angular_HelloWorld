@@ -8,6 +8,7 @@ import { AddWishFormComponent } from './add-wish-form/add-wish-form.component';
 import { WishFilterComponent } from './wish-filter/wish-filter.component';
 import { WishListItemComponent } from './wish-list-item/wish-list-item.component';
 
+import { EventService } from 'src/shared/services/EventService';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,11 @@ import { WishListItemComponent } from './wish-list-item/wish-list-item.component
   ],
   imports: [
     BrowserModule,
-    FormsModule  // to have access to the ngModel
+    FormsModule,  // to have access to the ngModel
   ],
-  providers: [],
+  providers: [
+    EventService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
