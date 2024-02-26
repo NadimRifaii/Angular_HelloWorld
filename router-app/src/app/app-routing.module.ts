@@ -4,6 +4,7 @@ import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ContactComponent } from './contact/contact.component';
+import { ProductslistComponent } from './products/productslist/productslist.component';
 /**
  * localhost:4200/first
  * localhost:4200/second
@@ -26,6 +27,10 @@ const routes: Routes = [
     component: ContactComponent
   }
   ,
+  {
+    path: 'products',
+    component: ProductslistComponent
+  },
   {
     path: '**',
     component: NotFoundComponent
