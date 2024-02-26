@@ -20,4 +20,7 @@ export class ProductsService {
   getAllProducts() {
     return of(this.data)//observable of our data
   }
+  getProduct(id: number) {
+    return of(this.data.find(product => product.id == id))
+  }
 }
