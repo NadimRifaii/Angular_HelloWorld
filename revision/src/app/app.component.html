@@ -2,46 +2,16 @@
 
 <div class="container">
 
-  <form class="row mt-3 gx-3 gy-2 align-items-center justify-content-center">
-    <div class="col-sm-6">
-      <label class="visually-hidden">
-      </label>
-      <input name="new-wish-text" [(ngModel)]="newWishText" type="text" class="form-control">
-    </div>
-    <div class="col-auto">
-      <button (click)="$event.preventDefault();addWishItem()" type="submit" class="btn btn-primary">Add Wish</button>
-    </div>
-  </form>
+  <app-add-wish-form (addWishEvent)="items.push($event)"></app-add-wish-form>
+  <!-- The $event is the WishItem object -->
   <div class="row mt-3">
-    <div class="col-sm-2">
-      <select class="form-select" [(ngModel)]="listFilter" (ngModelChange)="filterChange($event)">
-        <!-- The $event contains the new value of the model here -->
-        <option value="0">All</option>
-        <option value="1">Unfulfilled</option>
-        <option value="2">Fulfilled</option>
-      </select>
-    </div>
+    <!-- <app-wish-filter (filterEvent)="filter=$event"></app-wish-filter> -->
+    <app-wish-filter [(filter)]="filter"></app-wish-filter>
   </div>
   <div class="row mt-3">
-    <div *ngIf="visibleItems.length==0;then noItems else showItems">
-    </div>
-    <ng-template #noItems>
-      <div *ngIf="items.length==0">
-        No wishes to display
-      </div>
-    </ng-template>
-    <ng-template #showItems>
-      <ul class="wish-list" *ngIf="visibleItems.length>0">
-        <li *ngFor="let item of visibleItems;index as ii">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input [checked]="item.isComplete" checked="{{item.isComplete}}" type="checkbox" class="checkbox"
-                [attr.data-index]="ii" (change)="toggleItem($event,item)">{{item.wishText}}
-            </label>
-          </div>
-        </li>
-      </ul>
-    </ng-template>
+    <!-- <app-wish-list [items]="visibleItems"></app-wish-list> -->
+    <app-wish-list [items]="items.filter(filter)"></app-wish-list>
+    <!-- Supplying the visibleItems array to a prpoerty on this component called items  -->
   </div>
 </div>
 <!-- 

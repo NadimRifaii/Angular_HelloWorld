@@ -1,0 +1,10 @@
+<li class="d-flex align-items-center">
+  <div class="form-check">
+    <!-- <label class="form-check-label" [ngClass]="fullfilled?'strikeout':''"> -->
+    <label class="form-check-label" [ngClass]="cssClasses">
+      <input [checked]="item.isComplete" checked="{{item.isComplete}}" type="checkbox" class="checkbox"
+        (change)="toggleItem($event,item)">{{item.wishText}}
+    </label>
+  </div>
+  <div class="btn-close btn" type="button" (click)="removeWish(item)"></div>
+</li>

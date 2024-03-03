@@ -1,0 +1,13 @@
+<div *ngIf="items.length==0;then noItems else showItems">
+</div>
+<ng-template #noItems>
+  <div *ngIf="items.length==0">
+    No wishes to display
+  </div>
+</ng-template>
+<ng-template #showItems>
+  <ul class="wish-list" *ngIf="items.length>0">
+    <app-wish-list-item *ngFor="let item of items;index as ii" [wishText]="item.wishText"
+      [(fullfilled)]="item.isComplete" [item]="item"></app-wish-list-item>
+  </ul>
+</ng-template>
