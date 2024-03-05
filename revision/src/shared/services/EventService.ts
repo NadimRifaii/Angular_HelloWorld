@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 
 /**
  * The Subject is a special type of Observable that allows us to emit values to multiple subscribers
@@ -19,7 +19,7 @@ export class EventService {
   emit(eventName: string, payload: any) {
     this.subject.next({ eventName, payload })
   }
-  listen(eventName: string, callback: (event: any) => void) {
+  listen(eventName: string, callback: (payload: any) => void) {
     this.subject.asObservable().subscribe((nextObj: any) => {
       if (nextObj.eventName === eventName)
         callback(nextObj.payload)

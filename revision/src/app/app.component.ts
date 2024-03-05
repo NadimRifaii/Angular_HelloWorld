@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { WishItem } from 'src/shared/models/WishItem';
 // import events from '../shared/services/EventService'
 import { EventService } from '../shared/services/EventService'
+import { WishService } from './wish.service';
 /**
  * The component decorator gives us information about the component
  */
@@ -12,7 +13,16 @@ import { EventService } from '../shared/services/EventService'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private events: EventService) {
+  ngOnInit(): void {
+    this.wishService.getWishes().subscribe((data: any) => {
+      this.items = data
+    },
+      (error: any) => {
+        alert(error.message)
+      }
+    )
+  }
+  constructor(private events: EventService, private wishService: WishService) {
     events.listen('removeWish', (item: any) => {
       // this.items = this.items.filter(i => i.wishText !== item.wishText)
       const index = this.items.indexOf(item)
@@ -21,9 +31,6 @@ export class AppComponent {
     })
   }
   items: WishItem[] = [
-    new WishItem('To learn angular', true),
-    new WishItem('To revise angular'),
-    new WishItem("To master angular")
   ];
   title = 'revision';
 
