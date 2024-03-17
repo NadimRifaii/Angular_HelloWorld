@@ -32,7 +32,7 @@ export class WishService {
         // we want to create our url parameters from this object 
       }
     })
-    return this.httpClient.get('assetss/wishes.json?format=json', options).pipe(catchError(this.handleError))//piping a process that will process an error if it occurs
+    return this.httpClient.get('assets/wishes.json?format=json', options).pipe(catchError(this.handleError))//piping a process that will process an error if it occurs
   }
   private handleError(error: HttpErrorResponse) {
     if (error.status == 0) {

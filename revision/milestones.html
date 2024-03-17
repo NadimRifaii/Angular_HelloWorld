@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const initialMilestones = [{
+      id: 1,
+      name: "Milestone1",
+      isActive: true,
+      defaultAssignee: 'Nadim'
+    },
+    {
+      id: 2,
+      name: "Milestone2",
+      isActive: true,
+      defaultAssignee: 'Rifaii'
+    },]
+    let hasPropertiesChanged = false
+    const milestones = [...initialMilestones]
+    const addedMilestones = new Set()
+    const removedMilestones = new Set()
+    const milestonesStatusChanged = new Set()
+    const addMilestone = (milestone) => {
+      milestones.push(milestone)
+      addedMilestones.add(milestone)
+      if (removedMilestones.has(milestone))
+        removedMilestones.delete(milestone)
+      hasPropertiesChanged = true
+    }
+    const removeMilestone = (milestone) => {
+      milestones.splice(milestones.indexOf(milestone), 1)
+      removedMilestones.add(milestone)
+      if (addedMilestones.has(milestone))
+        addedMilestones.delete(milestone)
+      hasPropertiesChanged = true
+    }
+    const toggleIsActive = (milestone, isActive) => {
+      const initialMilestone = initialMilestones.find(m => m.id === milestone.id);
+      if (!initialMilestone) {
+        return;
+      }
+      if (initialMilestone.isActive !== isActive) {
+        milestone.isActive = isActive;
+        milestonesStatusChanged.add(milestone);
+        hasPropertiesChanged = true;
+      } else {
+        milestonesStatusChanged.delete(milestone);
+        hasPropertiesChanged = addedMilestones.size > 0 || removedMilestones.size > 0 || milestonesStatusChanged.size > 0
+      }
+    };
+  </script>
+</body>
+
+</html>

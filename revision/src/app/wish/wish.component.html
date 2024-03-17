@@ -1,0 +1,56 @@
+<!-- This is the html template for the app component -->
+
+<div class="container">
+
+  <app-add-wish-form (addWishEvent)="items.push($event)"></app-add-wish-form>
+  <!-- The $event is the WishItem object -->
+  <div class="row mt-3">
+    <!-- <app-wish-filter (filterEvent)="filter=$event"></app-wish-filter> -->
+    <app-wish-filter [(filter)]="filter"></app-wish-filter>
+  </div>
+  <div class="row mt-3">
+    <!-- <app-wish-list [items]="visibleItems"></app-wish-list> -->
+    <app-wish-list [items]="items.filter(filter)"></app-wish-list>
+    <!-- Supplying the visibleItems array to a prpoerty on this component called items  -->
+  </div>
+</div>
+<!-- 
+  The same element can't have more than one structural directive
+Directives:[
+  <div *ngIf="condition">Element will be rendered if condition is true.</div>
+  
+  <div *ngFor="let item of items">{{item}}</div>
+
+
+  NgSwitch: This is a structural directive that adds/removes DOM elements based on a given condition.
+  <div [ngSwitch]="value">
+    <div *ngSwitchCase="'case1'">Case 1 content here</div>
+    <div *ngSwitchCase="'case2'">Case 2 content here</div>
+    <div *ngSwitchDefault>Default case content here</div>
+  </div>
+
+  NgClass: This is an attribute directive that adds or removes CSS classes based on the expression evaluation.
+  <div [ngClass]="{'class1': condition1, 'class2': condition2}">...</div>
+
+  <div [ngStyle]="{'font-size': '12px', 'color': 'blue'}">...</div>
+]
+
+
+Binding data to properties:[
+  [javascriptProperty]:'javascript expression'
+  [attr.customAttribute]:'javascript expression'
+]
+
+Binding events:[
+  (event):'javascript expression'
+]
+
+NgModel: This is a directive used in forms to bind
+the value of an input element to a variable:[
+<input [(ngModel)]="variable" />
+
+(ngModelChange):This is an event that occurs only when the model changes
+So we can only use this event on elements that use the ngModel directive
+]
+
+-->

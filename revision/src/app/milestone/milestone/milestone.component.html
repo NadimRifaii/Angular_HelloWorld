@@ -1,0 +1,20 @@
+<div class="milestones-list">
+  <ul>
+    <li *ngFor="let milestone of milestones">
+      <label>
+        <input type="checkbox" [checked]="milestone.isActive" (change)="toggleIsActive(milestone,!milestone.isActive)">
+        {{milestone.name}}
+      </label>
+      <div class="remove-button">
+        <button (click)="removeMilestone(milestone)">Remove milestone</button>
+      </div>
+      <hr>
+    </li>
+  </ul>
+</div>
+<div class="add-button">
+  <button (click)="addMilestone(createMilestone())">Add milestone</button>
+</div>
+<div class="save-button">
+  <button [disabled]="!hasPropertiesChanged" (click)="save()">Save</button>
+</div>
